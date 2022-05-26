@@ -20,7 +20,7 @@ jobs:
     - uses: actions/checkout@v1.2.0
 
     - name: Build Docker Image
-      run: docker build . -t "TestDockerImage" 
+      run: docker build . -t "default-docker-remote" 
 
     # - name: Login to JFrog
     #   uses: docker login sample113355.jfrog.io
