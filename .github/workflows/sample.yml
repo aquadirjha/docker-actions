@@ -13,18 +13,35 @@ jobs:
           node -v
           npm -v
 
-  zap_scan:
+#   zap_scan:
+#     runs-on: ubuntu-latest
+#     name: Scan the webapplication
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+#         with:
+#           ref: master
+#       - name: ZAP Scan
+#         uses: zaproxy/action-full-scan@v0.4.0
+#         with:
+#           docker_name: 'owasp/zap2docker-stable'
+#           target: 'http://testphp.vulnweb.com/'
+#           rules_file_name: '.zap/rules.tsv'
+#           cmd_options: '-a'
+          
+
+
+  artifactoryUpload:
+    name: Upload Trigger
     runs-on: ubuntu-latest
-    name: Scan the webapplication
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: master
-      - name: ZAP Scan
-        uses: zaproxy/action-full-scan@v0.4.0
-        with:
-          docker_name: 'owasp/zap2docker-stable'
-          target: 'http://testphp.vulnweb.com/'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a'
+    - uses: actions/checkout@v1.2.0
+    - name: build
+      run: ./buildmyartifact.sh
+    - name: publish to artifactory
+      uses: advancedcsg-open/action-jfrog-cli@master
+      with:
+        url: 'https://sample113355.jfrog.io'
+        credentials type: 'apikey'
+        apikey: ${{ secrets.RT_APIKEY }}
+        args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
