@@ -45,7 +45,7 @@ jobs:
     - name : List Docker image from custom folder2
       run : sudo ls -lts /var/lib/docker/image
     - name : List Docker image from custom folder3
-      run : sudo ls -lts /var/lib/docker/image/overlay2
+      run : sudo ls -lts /var/lib/docker/image/overlay2/imagedb
 
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
