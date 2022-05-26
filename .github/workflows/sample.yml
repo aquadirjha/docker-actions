@@ -41,9 +41,9 @@ jobs:
     - name: List Docker image
       run: ls -ltrs
     - name : List Docker image from custom folder1
-      run : ls -lts /var/lib/docker/
+      run : sudo ls -lts /var/lib/docker/
     - name : List Docker image from custom folder2
-      run : ls -lts /var/lib/docker/images
+      run : sudo ls -lts /var/lib/docker/images
 
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
