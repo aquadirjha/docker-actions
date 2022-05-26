@@ -31,27 +31,23 @@ jobs:
           
 
 
-  artifactoryUpload:
-    name: Upload Trigger
+  DockerImageBuildAndPush:
+    name: Docker Task
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1.2.0
-    - name: Docker build
-      run: docker build -t test:v1 .
-    - name: List Docker image
-      run: ls -ltrs
-    - name : List Docker image from custom folder1
-      run : sudo ls -lts /var/lib/docker/
-    - name : List Docker image from custom folder2
-      run : sudo ls -lts /var/lib/docker/image
-    - name : List Docker image from custom folder3
-      run : sudo ls -R /var/lib/docker/image/overlay2/imagedb/content
-    - name : Creating Tar file
-      run : tar -cvf sample.tar .
-    - name: publish to artifactory
-      uses: advancedcsg-open/action-jfrog-cli@master
+
+    - name: Build Docker Image
+      run: docker build . -t "TestDockerImage" 
+
+    - name: Login to JFrog
+      uses: docker login sample113355.jfrog.io
       with:
-        url: 'https://sample113355.jfrog.io/artifactory'
-        credentials type: 'apikey'
-        apikey: ${{ secrets.RT_APIKEY }}
-        args: u "sample.tar" sampleApp/
+        apikey: ${{ secrets.DOCKER_REGISTRY }}
+
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: sample113355.jfrog.io/TestDockerImage:latest
