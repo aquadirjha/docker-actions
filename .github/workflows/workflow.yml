@@ -46,4 +46,4 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: sample113355.jfrog.io/TestDockerImage:latest
+        tags: sample113355.jfrog.io/default-docker-remote:latest
