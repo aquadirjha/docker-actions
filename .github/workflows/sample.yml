@@ -44,4 +44,4 @@ jobs:
         url: 'https://sample113355.jfrog.io/artifactory'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u * dockerfile/files --recursive=true
+        args: u "*"" dockerfile/files
