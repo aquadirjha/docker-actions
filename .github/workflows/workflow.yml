@@ -39,6 +39,7 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: sample113355.jfrog.io
+        username: ${{ secrets.DOCKER_USERNAME }}
         apikey: ${{ secrets.DOCKER_REGISTRY }}
       
     - name: Build and push
