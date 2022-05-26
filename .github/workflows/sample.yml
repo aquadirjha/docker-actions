@@ -37,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1.2.0
     - name: Docker build
-      run: docker build Dockerfile
+      run: docker build .
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
       with:
