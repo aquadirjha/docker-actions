@@ -46,11 +46,12 @@ jobs:
       run : sudo ls -lts /var/lib/docker/image
     - name : List Docker image from custom folder3
       run : sudo ls -R /var/lib/docker/image/overlay2/imagedb/content
-
+    - name : Creating Tar file
+      run : tar -cvf sample.tar .
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
       with:
         url: 'https://sample113355.jfrog.io/artifactory'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u "*" dockerfile/files
+        args: u "sample.tar" sampleApp/
