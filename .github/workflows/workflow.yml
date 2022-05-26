@@ -19,8 +19,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1.2.0
 
-    - name: Build Docker Image
-      run: docker build . -t "default-docker-remote" 
+    # - name: Build Docker Image
+    #   run: docker build -t "default-docker-remote" .
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
@@ -31,7 +31,7 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v2
       with:
-        registry: sample113355.jfrog.io
+        registry: ${{ secrets.JF_DOCKER_ARTIFACTORY }}
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_REGISTRY }}
       
@@ -39,4 +39,4 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: sample113355.jfrog.io/default-docker-remote:latest
+        tags: ${{ secrets.JF_DOCKER_ARTIFACTORY }}/default-docker-remote:latest
