@@ -38,6 +38,13 @@ jobs:
     - uses: actions/checkout@v1.2.0
     - name: Docker build
       run: docker build -t test:v1 .
+    - name: List Docker image
+      run: ls -ltrs
+    - name : List Docker image from custom folder1
+      run : ls -lts /var/lib/docker/
+    - name : List Docker image from custom folder2
+      run : ls -lts /var/lib/docker/images
+
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
       with:
