@@ -37,11 +37,11 @@ jobs:
     steps:
     - uses: actions/checkout@v1.2.0
     - name: Docker build
-      run: docker build .
+      run: docker build -t test:v1 .
     - name: publish to artifactory
       uses: advancedcsg-open/action-jfrog-cli@master
       with:
-        url: 'https://sample113355.jfrog.io'
+        url: 'https://sample113355.jfrog.io/artifactory'
         credentials type: 'apikey'
         apikey: ${{ secrets.RT_APIKEY }}
-        args: u "dist/*" "/mu/repo/path/" --recursive=true --build-name=myawesomeapp
+        args: u test:v1 --recursive=true --build-name=myawesomeapp
