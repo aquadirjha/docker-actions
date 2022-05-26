@@ -13,24 +13,6 @@ jobs:
           node -v
           npm -v
 
-#   zap_scan:
-#     runs-on: ubuntu-latest
-#     name: Scan the webapplication
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#         with:
-#           ref: master
-#       - name: ZAP Scan
-#         uses: zaproxy/action-full-scan@v0.4.0
-#         with:
-#           docker_name: 'owasp/zap2docker-stable'
-#           target: 'http://testphp.vulnweb.com/'
-#           rules_file_name: '.zap/rules.tsv'
-#           cmd_options: '-a'
-          
-
-
   DockerImageBuildAndPush:
     name: Docker Task
     runs-on: ubuntu-latest
@@ -48,6 +30,18 @@ jobs:
     - name: Build and push
       id: docker_build
     - uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: sample113355.jfrog.io/TestDockerImage:latest
+
+      
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        apikey: ${{ secrets.DOCKER_REGISTRY }}
+      
+    - name: Build and push
+      uses: docker/build-push-action@v3
       with:
         push: true
         tags: sample113355.jfrog.io/TestDockerImage:latest
