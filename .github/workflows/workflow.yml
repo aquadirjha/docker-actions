@@ -44,4 +44,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.JF_DOCKER_ARTIFACTORY }}/default-docker-remote:latest
+        tags: ${{ secrets.JF_DOCKER_ARTIFACTORY }}/artifactory/default-docker-remote:latest      #Value for JF_DOCKER_ARTIFACTORY is my customr JF Platform
