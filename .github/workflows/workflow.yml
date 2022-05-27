@@ -23,7 +23,7 @@ jobs:
     #   run: docker build -t "default-docker-remote" .
 
     # Variables and their reference values
-    # JF_DOCKER_ARTIFACTORY - Custom JF Artifactory Server Name,  value is coming from repo secrets
+    # JF_DOCKER_ARTIFACTORY - Custom JF Artifactory Server Name,  value is coming from repo secrets (server/ui/native/default-docker-remote)
     # DOCKER_USERNAME - JF Docker User Name, value is coming from repo secrets
     # DOCKER_REGISTRY - JF Docker Password, usig API token for authenticaton which is coming from repo secrets
     - name: Set up QEMU
