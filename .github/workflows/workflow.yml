@@ -1,4 +1,4 @@
-name: Shell commands
+name: Workflow Test
 on: [push]
 
 jobs:
@@ -26,6 +26,7 @@ jobs:
     # JF_DOCKER_ARTIFACTORY - Custom JF Artifactory Server Name,  value is coming from repo secrets (server/ui/native/default-docker-remote)
     # DOCKER_USERNAME - JF Docker User Name, value is coming from repo secrets
     # DOCKER_REGISTRY - JF Docker Password, usig API token for authenticaton which is coming from repo secrets
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
 
@@ -45,3 +46,5 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.JF_DOCKER_ARTIFACTORY }}/sample-docker/sample-images:v2      #Value for JF_DOCKER_ARTIFACTORY is my customr JF Platform
+
+# Need to add .Net build task
