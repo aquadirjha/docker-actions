@@ -7,8 +7,8 @@
 #
 
 #
-# The line below states we will base our new image on the Latest Official Ubuntu 
-FROM ubuntu:latest
+# Intentionally using older version of Ubuntu for XRay Scan
+FROM ubuntu:xenial-20201030  
 
 #
 # Identify the maintainer of an image
