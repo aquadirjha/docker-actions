@@ -37,4 +37,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKER_REGISTRY }}/default-docker-local/sample-images:v2
+        tags: ${{ secrets.DOCKER_REGISTRY }}/default-docker-local/docker-images
