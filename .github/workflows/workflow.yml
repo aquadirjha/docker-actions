@@ -41,5 +41,5 @@ jobs:
     - run: |
           jf --version
           jfrog c add testaccount --artifactory-url ${{ secrets.TESTARTIFACTORY}} --user ${{ secrets.TESTUSER }} --access-token ${{ secrets.TESTTOKEN }}
-          jf rt docker-push ${{ secrets.TESTARTIFACTORY}}/default-docker-local/v2 docker-local --build-name=my-docker-build  --build-number=1
+          jf rt docker-push ${{ secrets.DOCKER_REGISTRY}}/default-docker-local/v2 docker-local --build-name=my-docker-build  --build-number=1
           jf rt build-scan my-docker-build 1
