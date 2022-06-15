@@ -17,9 +17,13 @@ jobs:
     name: Docker Task
     runs-on: ubuntu-latest
     steps:
+
     - uses: actions/checkout@v1.2.0
+
+
+    
       
-    - name: Login to DockerHub
+    - name: Login to JFrgo Docker Repository
       uses: docker/login-action@v2
       with:
         registry: ${{ secrets.DOCKER_REGISTRY}}
@@ -30,5 +34,11 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        push: true
-        tags: ${{ secrets.DOCKER_REGISTRY }}/default-docker-local/v1
+        push: false
+        tags: ${{ secrets.DOCKER_REGISTRY }}/default-docker-local/v2
+
+    - uses: jfrog/setup-jfrog-cli@v2
+    - run: |
+          jf --version
+          jf rt docker-push ${{ secrets.DOCKER_REGISTRY }}/default-docker-local/v2 docker-local --build-name=my-docker-build  --build-number=1
+          jf rt build-scan my-docker-build 1
