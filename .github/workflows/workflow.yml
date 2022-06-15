@@ -30,7 +30,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME}}
         password: ${{ secrets.DOCKER_APIKEY }}
       
-    - name: Build and push
+    - name: Build Docker Image
       uses: docker/build-push-action@v3
       with:
         context: .
@@ -40,5 +40,6 @@ jobs:
     - uses: jfrog/setup-jfrog-cli@v2
     - run: |
           jf --version
-          jf rt docker-push ${{ secrets.DOCKER_REGISTRY }}/default-docker-local/v2 docker-local --build-name=my-docker-build  --build-number=1
+          jfrog c add testaccount --artifactory-url ${{ secrets.TESTARTIFACTORY}} --user ${{ secrets.TESTUSER }} --access-token ${{ secrets.TESTTOKEN }}
+          jf rt docker-push ${{ secrets.TESTARTIFACTORY}}/default-docker-local/v2 docker-local --build-name=my-docker-build  --build-number=1
           jf rt build-scan my-docker-build 1
